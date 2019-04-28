@@ -16,6 +16,7 @@
     ]
   },
   "dependencies": {
+    "moment": "^2.24.0",
     "normalize.css": "^8.0.1",
     "react": "^16.8.6",
     "react-context-global-state": "^2.1.5",

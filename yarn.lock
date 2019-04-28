@@ -3070,6 +3070,10 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-context-global-state@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/react-context-global-state/-/react-context-global-state-2.1.5.tgz#fee01aabef5e05ae6deb0ce2ebdb4f02036fccf9"
+
 react-dom@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"

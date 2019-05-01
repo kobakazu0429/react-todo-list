@@ -6,6 +6,7 @@
     "target": "es6",
     "jsx": "react",
     "typeRoots": ["node_modules/@types", "src/typings"],
+    "types": ["react"],
     "lib": ["esnext", "dom"],
     "allowSyntheticDefaultImports": true,
     "strict": true,

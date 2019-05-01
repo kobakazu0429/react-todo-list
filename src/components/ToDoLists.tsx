@@ -1,24 +1,46 @@
 import React from "react";
 import styled from "styled-components";
 
+import { setGlobalState } from "../RootContext";
+import todos, { T_text, T_isCompleted, T_uuid } from "../api/todos";
+
 import ToDoItem from "./ToDoItem";
 
 interface ITodo {
-  text: string;
-  isCompleted: boolean;
+  text: T_text;
+  isCompleted: T_isCompleted;
+  uuid: T_uuid;
 }
 
 interface IProps {
   todos: ITodo[];
 }
 
-const ToDoLists = (props: IProps) => (
-  <Ul>
-    {props.todos.map((todo, i) => (
-      <ToDoItem text={todo.text} isCompleted={todo.isCompleted} key={i} />
-    ))}
-  </Ul>
-);
+class ToDoLists extends React.Component<IProps> {
+  constructor(props: IProps) {
+    super(props);
+  }
+
+  public async componentDidMount() {
+    const TODO = await todos.get();
+    setGlobalState("TODO", TODO);
+  }
+
+  public render() {
+    return (
+      <Ul>
+        {this.props.todos.map((todo, i) => (
+          <ToDoItem
+            text={todo.text}
+            isCompleted={todo.isCompleted}
+            uuid={todo.uuid}
+            key={i}
+          />
+        ))}
+      </Ul>
+    );
+  }
+}
 
 const Ul = styled.ul`
   display: flex;

@@ -4,29 +4,66 @@ import styled from "styled-components";
 import color from "../commons/color";
 import { media } from "../commons/device";
 
+import todos from "../api/todos";
+
 import MaterialRectangleButton from "./MaterialRectangleButton";
 
-const ToDoModalForm = () => (
-  <Wrapper>
-    <div>
-      <InputLabel htmlFor="ToDoInput">
-        <Input type="text" id="ToDoInput" placeholder="&nbsp;" />
-        <Label>ToDo Text Here</Label>
-        <Border />
-      </InputLabel>
-    </div>
-    <Buttons>
-      <MaterialRectangleButton
-        InnerComponents={"キャンセルする"}
-        onClick={() => console.log("キャンセルする")}
-      />
-      <MaterialRectangleButton
-        InnerComponents={"登録する"}
-        onClick={() => console.log("登録する")}
-      />
-    </Buttons>
-  </Wrapper>
-);
+interface IProps {
+  toggleModal: () => void;
+}
+
+interface IState {
+  todoText: string;
+}
+
+class ToDoModalForm extends React.Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+
+    this.state = {
+      todoText: ""
+    };
+
+    this.handleNewToDo = this.handleNewToDo.bind(this);
+    this.toggleModal = this.props.toggleModal;
+  }
+
+  private toggleModal: () => void;
+
+  public render() {
+    return (
+      <Wrapper>
+        <InputLabel htmlFor="ToDoInput">
+          <Input
+            type="text"
+            id="ToDoInput"
+            placeholder="&nbsp;"
+            value={this.state.todoText}
+            onChange={e => this.setState({ todoText: e.target.value })}
+          />
+          <Label>ToDo Text Here</Label>
+          <Border />
+        </InputLabel>
+
+        <Buttons>
+          <MaterialRectangleButton
+            InnerComponents={"キャンセルする"}
+            onClick={this.toggleModal}
+          />
+          <MaterialRectangleButton
+            InnerComponents={"登録する"}
+            onClick={this.handleNewToDo}
+          />
+        </Buttons>
+      </Wrapper>
+    );
+  }
+
+  private handleNewToDo() {
+    todos.post({ text: this.state.todoText });
+    window.location.reload();
+  }
+}
 
 const Wrapper = styled.div`
   width: 100%;

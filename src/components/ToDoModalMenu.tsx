@@ -25,8 +25,7 @@ class ToDoModalMenu extends React.Component<{}, IState> {
     this.beforeClose = this.beforeClose.bind(this);
   }
 
-  // tslint:disable-next-line:member-access
-  render() {
+  public render() {
     return (
       <>
         <MaterialCircleButton
@@ -42,7 +41,7 @@ class ToDoModalMenu extends React.Component<{}, IState> {
           onEscapeKeydown={this.toggleModal}
           opacity={this.state.opacity}
         >
-          <ToDoModalForm />
+          <ToDoModalForm toggleModal={this.toggleModal} />
         </StyledModal>
       </>
     );
